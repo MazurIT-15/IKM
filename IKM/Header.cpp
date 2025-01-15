@@ -25,12 +25,12 @@ void multiply(int* num1, int num2, int* result, int& result_size) {
 
 //Функция для возведения в степень
 void pow(int x, int n, int* result, int& result_size)
-{   
+{
     result[0] = 1; // Начальное значение - 1
     result_size = 1;
 
-    for (int i = 0; i<n; i++)
-    {   
+    for (int i = 0; i < n; i++)
+    {
         multiply(result, x, result, result_size);
     }
 }
@@ -57,8 +57,8 @@ void add(int* num1, int size1, int* num2, int size2, int* result, int& result_si
 
 // Основная функция для вычисления суммы
 void sumOf(int n)
-{   
-    int sum[MAX_DIGITS] = {0}; // Массив для хранения суммы
+{
+    int sum[MAX_DIGITS] = { 0 }; // Массив для хранения суммы
     int sum_size = 1; // Изначально сумма равна 0 (1 цифра)
 
     for (int i = 1; i <= n; ++i) {
