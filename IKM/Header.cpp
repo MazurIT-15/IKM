@@ -5,17 +5,17 @@
 const int MAX_DIGITS = 1000;
 using namespace std;
 
-// Функция для умножения больших число
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СѓРјРЅРѕР¶РµРЅРёСЏ Р±РѕР»СЊС€РёС… С‡РёСЃР»Рѕ
 void multiply(int* num1, int num2, int* result, int& result_size) {
 
     int carry = 0;
     for (int i = 0; i < result_size; i++) {
         int product = num1[i] * num2 + carry;
-        result[i] = product % 10; // Сохраняем последнюю цифру
-        carry = product / 10; // Получаем перенос
+        result[i] = product % 10; // РЎРѕС…СЂР°РЅСЏРµРј РїРѕСЃР»РµРґРЅСЋСЋ С†РёС„СЂСѓ
+        carry = product / 10; // РџРѕР»СѓС‡Р°РµРј РїРµСЂРµРЅРѕСЃ
     }
     
-    while (carry) { // Обработка переноса
+    while (carry) { // РћР±СЂР°Р±РѕС‚РєР° РїРµСЂРµРЅРѕСЃР°
         result[result_size] = carry % 10;
         carry /= 10;
         result_size++;
@@ -23,54 +23,54 @@ void multiply(int* num1, int num2, int* result, int& result_size) {
 
 }
 
-//Функция для возведения в степень
+//Р¤СѓРЅРєС†РёСЏ РґР»СЏ РІРѕР·РІРµРґРµРЅРёСЏ РІ СЃС‚РµРїРµРЅСЊ
 void pow(int x, int n, int* result, int& result_size)
 {
-    result[0] = 1; // Начальное значение - 1
+    result[0] = 1; // РќР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ - 1
     result_size = 1;
 
     for (int i = 0; i < n; i++)
     {
-        multiply(result, x, result, result_size);
+        multiply(result, x, result, result_size);// РЈРјРЅРѕР¶Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚ РЅР° x
     }
 }
 
-// Функция для сложения больших чисел
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СЃР»РѕР¶РµРЅРёСЏ Р±РѕР»СЊС€РёС… С‡РёСЃРµР»
 void add(int* num1, int size1, int* num2, int size2, int* result, int& result_size) {
     int carry = 0;
     result_size = max(size1, size2);
 
-    for (int i = 0; i < result_size || carry; ++i) {
-        if (i < size1) carry += num1[i];
-        if (i < size2) carry += num2[i];
+    for (int i = 0; i < result_size || carry; ++i) {// РџСЂРѕС…РѕРґ РїРѕ РІСЃРµРј СЂР°Р·СЂСЏРґР°Рј
+        if (i < size1) carry += num1[i];// Р”РѕР±Р°РІР»СЏРµРј С†РёС„СЂСѓ РёР· РїРµСЂРІРѕРіРѕ С‡РёСЃР»Р°
+        if (i < size2) carry += num2[i];// Р”РѕР±Р°РІР»СЏРµРј С†РёС„СЂСѓ РёР· РІС‚РѕСЂРѕРіРѕ С‡РёСЃР»Р°
         result[i] = carry % 10;
         carry /= 10;
     }
 
     while (result_size > 1 && result[result_size - 1] == 0) {
-        result_size--; // Удаление ведущих нулей
+        result_size--; // РЈРґР°Р»РµРЅРёРµ РІРµРґСѓС‰РёС… РЅСѓР»РµР№
     }
 
 }
 
 
 
-// Основная функция для вычисления суммы
+// РћСЃРЅРѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ СЃСѓРјРјС‹
 void sumOf(int n)
 {
-    int sum[MAX_DIGITS] = { 0 }; // Массив для хранения суммы
-    int sum_size = 1; // Изначально сумма равна 0 (1 цифра)
+    int sum[MAX_DIGITS] = { 0 }; // РњР°СЃСЃРёРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЃСѓРјРјС‹
+    int sum_size = 1; // РР·РЅР°С‡Р°Р»СЊРЅРѕ СЃСѓРјРјР° СЂР°РІРЅР° 0 (1 С†РёС„СЂР°)
 
     for (int i = 1; i <= n; ++i) {
-        int current_power[MAX_DIGITS] = { 0 }; // Массив для текущей степени
+        int current_power[MAX_DIGITS] = { 0 }; // РњР°СЃСЃРёРІ РґР»СЏ С‚РµРєСѓС‰РµР№ СЃС‚РµРїРµРЅРё
         int current_power_size;
 
-        pow(i, n, current_power, current_power_size); // Возведение в степень
-        add(sum, sum_size, current_power, current_power_size, sum, sum_size); // Сложение
+        pow(i, n, current_power, current_power_size); // Р’РѕР·РІРµРґРµРЅРёРµ РІ СЃС‚РµРїРµРЅСЊ
+        add(sum, sum_size, current_power, current_power_size, sum, sum_size); // РЎР»РѕР¶РµРЅРёРµ
     }
 
-    // Вывод результата
-    cout << "Сумма 1^" << n << " + 2^" << n << " + ... + " << n << "^" << n << " = ";
+    // Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р°
+    cout << "РЎСѓРјРјР° 1^" << n << " + 2^" << n << " + ... + " << n << "^" << n << " = ";
     for (int i = sum_size - 1; i >= 0; i--) {
         cout << sum[i];
     }
