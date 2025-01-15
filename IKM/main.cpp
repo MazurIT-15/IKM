@@ -15,8 +15,8 @@ bool IsNumber(string& n_str) {
 }
 
 int main() {
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
 
     string n_str;
     int n = 0;

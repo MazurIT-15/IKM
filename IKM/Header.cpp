@@ -14,6 +14,7 @@ void multiply(int* num1, int num2, int* result, int& result_size) {
         result[i] = product % 10; // Сохраняем последнюю цифру
         carry = product / 10;      // Получаем перенос
     }
+    //Обработка переноса
     while (carry) {
         result[result_size] = carry % 10;
         carry /= 10;
@@ -49,6 +50,7 @@ void add(int* num1, int size1, int* num2, int size2, int* result, int& result_si
     while (result_size > 1 && result[result_size - 1] == 0) {
         result_size--; // Удаление ведущих нулей
     }
+
 }
 
 
@@ -56,7 +58,7 @@ void add(int* num1, int size1, int* num2, int size2, int* result, int& result_si
 // Основная функция для вычисления суммы
 void sumOf(int n)
 {   
-    int sum[MAX_DIGITS] = { 0 }; // Массив для хранения суммы
+    int sum[MAX_DIGITS] = {0}; // Массив для хранения суммы
     int sum_size = 1; // Изначально сумма равна 0 (1 цифра)
 
     for (int i = 1; i <= n; ++i) {
@@ -68,7 +70,7 @@ void sumOf(int n)
     }
 
     // Вывод результата
-    cout << "Сумма: ";
+    cout << "Сумма 1^" << n << " + 2^" << n << " + ... + " << n << "^" << n << " = ";
     for (int i = sum_size - 1; i >= 0; i--) {
         cout << sum[i];
     }
