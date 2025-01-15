@@ -5,17 +5,17 @@
 const int MAX_DIGITS = 1000;
 using namespace std;
 
-// Функция для умножения больших чисел
+// Функция для умножения больших число
 void multiply(int* num1, int num2, int* result, int& result_size) {
 
     int carry = 0;
     for (int i = 0; i < result_size; i++) {
         int product = num1[i] * num2 + carry;
         result[i] = product % 10; // Сохраняем последнюю цифру
-        carry = product / 10;      // Получаем перенос
+        carry = product / 10; // Получаем перенос
     }
-    //Обработка переноса
-    while (carry) {
+    
+    while (carry) { // Обработка переноса
         result[result_size] = carry % 10;
         carry /= 10;
         result_size++;
