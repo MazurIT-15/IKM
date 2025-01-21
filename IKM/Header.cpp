@@ -47,6 +47,12 @@ void add(int* num1, int size1, int* num2, int size2, int* result, int& result_si
         carry /= 10;
     }
 
+    while (carry) { // Обработка переноса
+        result[result_size] = carry % 10;
+        carry /= 10;
+        result_size++;
+    }
+
     while (result_size > 1 && result[result_size - 1] == 0) {
         result_size--; // Удаление ведущих нулей
     }
