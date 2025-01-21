@@ -9,17 +9,43 @@ using namespace std;
 void multiply(int* num1, int num2, int* result, int& result_size) {
 
     int carry = 0;
+    int temp[MAX_DIGITS] = { 0 }; // Временный массив для хранения промежуточного результата
+    int temp_size = 0;
+
+    // Умножение на единицы
     for (int i = 0; i < result_size; i++) {
-        int product = num1[i] * num2 + carry;
-        result[i] = product % 10; // Сохраняем последнюю цифру
-        carry = product / 10; // Получаем перенос
+        int product = num1[i] * (num2 % 10) + carry;
+        temp[i] = product % 10; //сохраняем последнюю цифру
+        carry = product / 10; //перенос
     }
-    
-    while (carry) { // Обработка переноса
-        result[result_size] = carry % 10;
+    while (carry) {
+        temp[result_size] = carry % 10;
         carry /= 10;
         result_size++;
     }
+    temp_size = result_size;
+
+    // Умножение на десятки (если num2 двузначное)
+    if (num2 >= 10) {
+        carry = 0;
+        for (int i = 0; i < result_size; i++) {
+            int product = num1[i] * (num2 / 10) + carry;
+            temp[i + 1] += product % 10; // Сдвиг на один разряд влево
+            carry = product / 10;
+        }
+        while (carry) {
+            temp[result_size + 1] = carry % 10;
+            carry /= 10;
+            result_size++;
+        }
+        temp_size = result_size + 1;
+    }
+
+    // Копирование результата в выходной массив
+    for (int i = 0; i < temp_size; i++) {
+        result[i] = temp[i];
+    }
+    result_size = temp_size;
 
 }
 
